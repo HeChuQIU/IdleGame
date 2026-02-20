@@ -21,6 +21,7 @@ const DEFAULT_STATE = {
   lastTimestamp: 0
 };
 const AUTOSAVE_INTERVAL_MS = 10000;
+const FONT_FAMILY = '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", Arial, sans-serif';
 
 export class MainScene extends Phaser.Scene {
   constructor() {
@@ -37,14 +38,14 @@ export class MainScene extends Phaser.Scene {
     if (offlineGain > 0) {
       this.state.currencies.chronon += offlineGain;
       this.state.prestige.lifetimeChronon += offlineGain;
-      this.add.text(640, 80, `离线收益 +${NumberFormat.format(offlineGain)}`, { fontSize: '24px', color: '#6fffe9' }).setOrigin(0.5);
+      this.add.text(640, 80, `离线收益 +${NumberFormat.format(offlineGain)}`, { fontFamily: FONT_FAMILY, fontSize: '24px', color: '#6fffe9' }).setOrigin(0.5);
     }
 
     this.core = this.add.circle(640, 360, 110, 0x081a37, 1).setStrokeStyle(3, 0x78d5ff);
-    this.coreText = this.add.text(640, 360, '', { fontSize: '22px', align: 'center', color: '#d8ecff' }).setOrigin(0.5);
+    this.coreText = this.add.text(640, 360, '', { fontFamily: FONT_FAMILY, fontSize: '22px', align: 'center', color: '#d8ecff' }).setOrigin(0.5);
 
-    this.currencyText = this.add.text(640, 28, '', { fontSize: '20px', color: '#d8ecff' }).setOrigin(0.5, 0);
-    this.logText = this.add.text(1020, 120, '日志', { fontSize: '16px', color: '#9bc6ff', wordWrap: { width: 230 } });
+    this.currencyText = this.add.text(640, 28, '', { fontFamily: FONT_FAMILY, fontSize: '20px', color: '#d8ecff' }).setOrigin(0.5, 0);
+    this.logText = this.add.text(1020, 120, '日志', { fontFamily: FONT_FAMILY, fontSize: '16px', color: '#9bc6ff', wordWrap: { width: 230 } });
 
     const positions = getRadialPositions(640, 360, 230, GENERATORS.length);
     this.nodes = positions.map((p, i) => createGeneratorNode(this, p.x, p.y, () => this.buyGenerator(i)));
@@ -91,7 +92,7 @@ export class MainScene extends Phaser.Scene {
 
   createTextButton(x, y, label, onClick) {
     const bg = this.add.rectangle(x, y, 220, 32, 0x153366, 0.95).setStrokeStyle(1, 0x6cc9ff);
-    const text = this.add.text(x, y, label, { fontSize: '14px', color: '#d8ecff' }).setOrigin(0.5);
+    const text = this.add.text(x, y, label, { fontFamily: FONT_FAMILY, fontSize: '14px', color: '#d8ecff' }).setOrigin(0.5);
     const zone = this.add.zone(x, y, 220, 32).setInteractive({ useHandCursor: true });
     zone.on('pointerdown', onClick);
     return { bg, text, zone };

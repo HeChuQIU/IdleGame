@@ -4,6 +4,7 @@ import { BuffSystem } from '../systems/BuffSystem.js';
 
 const MAX_COMBO_BONUS = 0.5;
 const COMBO_BONUS_RATIO = 0.2;
+const FONT_FAMILY = '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", Arial, sans-serif';
 
 export class DungeonScene extends Phaser.Scene {
   constructor() {
@@ -32,11 +33,11 @@ export class DungeonScene extends Phaser.Scene {
 
     this.bg = this.add.rectangle(640, 360, 1280, 720, 0x130b26, 1);
     this.vignette = this.add.rectangle(640, 360, 1280, 720, 0x330000, 0);
-    this.title = this.add.text(640, 40, '时间裂隙冲刺', { fontSize: '30px', color: '#d8ecff' }).setOrigin(0.5);
-    this.timerText = this.add.text(60, 60, '', { fontSize: '28px', color: '#d8ecff' });
-    this.scoreText = this.add.text(60, 100, '', { fontSize: '24px', color: '#9df7ff' });
-    this.buffText = this.add.text(900, 60, 'Buff:\n', { fontSize: '16px', color: '#d8ecff', wordWrap: { width: 330 } });
-    this.add.text(640, 640, '每15秒触发一次3选1 Buff', { fontSize: '18px', color: '#9bc6ff' }).setOrigin(0.5);
+    this.title = this.add.text(640, 40, '时间裂隙冲刺', { fontFamily: FONT_FAMILY, fontSize: '30px', color: '#d8ecff' }).setOrigin(0.5);
+    this.timerText = this.add.text(60, 60, '', { fontFamily: FONT_FAMILY, fontSize: '28px', color: '#d8ecff' });
+    this.scoreText = this.add.text(60, 100, '', { fontFamily: FONT_FAMILY, fontSize: '24px', color: '#9df7ff' });
+    this.buffText = this.add.text(900, 60, 'Buff:\n', { fontFamily: FONT_FAMILY, fontSize: '16px', color: '#d8ecff', wordWrap: { width: 330 } });
+    this.add.text(640, 640, '每15秒触发一次3选1 Buff', { fontFamily: FONT_FAMILY, fontSize: '18px', color: '#9bc6ff' }).setOrigin(0.5);
   }
 
   update(_, delta) {
@@ -67,13 +68,13 @@ export class DungeonScene extends Phaser.Scene {
     const options = this.buffSystem.getDraftOptions();
     this.draftLayer = this.add.container(640, 360);
     const panel = this.add.rectangle(0, 0, 760, 260, 0x081a37, 0.98).setStrokeStyle(2, 0x78d5ff);
-    const title = this.add.text(0, -95, '选择一个 Buff', { fontSize: '24px', color: '#d8ecff' }).setOrigin(0.5);
+    const title = this.add.text(0, -95, '选择一个 Buff', { fontFamily: FONT_FAMILY, fontSize: '24px', color: '#d8ecff' }).setOrigin(0.5);
     this.draftLayer.add([panel, title]);
 
     options.forEach((buff, i) => {
       const x = (i - 1) * 240;
       const rect = this.add.rectangle(x, 20, 220, 150, 0x153366, 0.95).setStrokeStyle(1, 0x6cc9ff);
-      const txt = this.add.text(x, 20, `${buff.name}\n[${buff.tags.join(',')}]`, { fontSize: '16px', align: 'center', color: '#d8ecff', wordWrap: { width: 200 } }).setOrigin(0.5);
+      const txt = this.add.text(x, 20, `${buff.name}\n[${buff.tags.join(',')}]`, { fontFamily: FONT_FAMILY, fontSize: '16px', align: 'center', color: '#d8ecff', wordWrap: { width: 200 } }).setOrigin(0.5);
       const hit = this.add.zone(x, 20, 220, 150).setInteractive({ useHandCursor: true });
       hit.on('pointerdown', () => {
         this.buffSystem.applyBuff(buff);
@@ -92,9 +93,9 @@ export class DungeonScene extends Phaser.Scene {
     this.main.applyDungeonReward(anomalyData, bonus);
 
     const panel = this.add.rectangle(640, 360, 600, 260, 0x081a37, 0.99).setStrokeStyle(2, 0x78d5ff);
-    const text = this.add.text(640, 320, `副本结束\n得分: ${NumberFormat.format(this.system.getRunScore())}\n获得: ${anomalyData} AD`, { fontSize: '24px', align: 'center', color: '#d8ecff' }).setOrigin(0.5);
+    const text = this.add.text(640, 320, `副本结束\n得分: ${NumberFormat.format(this.system.getRunScore())}\n获得: ${anomalyData} AD`, { fontFamily: FONT_FAMILY, fontSize: '24px', align: 'center', color: '#d8ecff' }).setOrigin(0.5);
     const btn = this.add.rectangle(640, 450, 200, 50, 0x153366, 0.95).setStrokeStyle(1, 0x6cc9ff).setInteractive({ useHandCursor: true });
-    const btnText = this.add.text(640, 450, '返回主界面', { fontSize: '20px', color: '#d8ecff' }).setOrigin(0.5);
+    const btnText = this.add.text(640, 450, '返回主界面', { fontFamily: FONT_FAMILY, fontSize: '20px', color: '#d8ecff' }).setOrigin(0.5);
     btn.on('pointerdown', () => {
       this.scene.stop();
       this.main.scene.resume();
