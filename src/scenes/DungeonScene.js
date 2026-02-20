@@ -2,6 +2,9 @@ import { NumberFormat } from '../core/NumberFormat.js';
 import { DungeonSystem } from '../systems/DungeonSystem.js';
 import { BuffSystem } from '../systems/BuffSystem.js';
 
+const MAX_COMBO_BONUS = 0.5;
+const COMBO_BONUS_RATIO = 0.2;
+
 export class DungeonScene extends Phaser.Scene {
   constructor() {
     super('DungeonScene');
@@ -85,7 +88,7 @@ export class DungeonScene extends Phaser.Scene {
     if (this.finished) return;
     this.finished = true;
     const anomalyData = this.system.getAnomalyGain();
-    const bonus = Math.min(0.5, this.runState.comboMultiplier * 0.2);
+    const bonus = Math.min(MAX_COMBO_BONUS, this.runState.comboMultiplier * COMBO_BONUS_RATIO);
     this.main.applyDungeonReward(anomalyData, bonus);
 
     const panel = this.add.rectangle(640, 360, 600, 260, 0x081a37, 0.99).setStrokeStyle(2, 0x78d5ff);

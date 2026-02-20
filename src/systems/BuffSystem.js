@@ -1,6 +1,14 @@
 import { BUFFS } from '../data/buffs.js';
 
 const THRESHOLDS = [2, 4, 6];
+const shuffle = (list) => {
+  const arr = [...list];
+  for (let i = arr.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+};
 
 export class BuffSystem {
   constructor(runState) {
@@ -8,7 +16,7 @@ export class BuffSystem {
   }
 
   getDraftOptions() {
-    const pool = [...BUFFS].sort(() => Math.random() - 0.5);
+    const pool = shuffle(BUFFS);
     return pool.slice(0, 3);
   }
 

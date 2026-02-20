@@ -21,11 +21,13 @@ test('economy cost and cps formulas work', () => {
 });
 
 test('prestige gain formulas match design', () => {
+  const TEST_UPGRADE_ID = 'global-output-boost';
+  const TEST_P1_TECH_ID = 'chronon-amplifier';
   const state = {
     currencies: { chronon: 0, crystal: 0, shard: 0 },
     generators: [1, 1, 1, 1, 1],
-    upgrades: ['x'],
-    tech: { p1: ['a'] },
+    upgrades: [TEST_UPGRADE_ID],
+    tech: { p1: [TEST_P1_TECH_ID] },
     prestige: { lifetimeChronon: 4e6, lifetimeCrystal: 1e5, p1Multiplier: 1, p2Multiplier: 1, p1Count: 0, p2Count: 0 }
   };
   const p = new PrestigeSystem(state);

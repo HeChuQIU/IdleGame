@@ -6,11 +6,11 @@ export const NumberFormat = {
       const units = ['M', 'B', 'T'];
       let n = value;
       let idx = -1;
-      while (Math.abs(n) >= 1e3 && idx < units.length - 1) {
+      while (Math.abs(n) >= 1e3 && idx < units.length) {
         n /= 1e3;
         idx += 1;
       }
-      return `${n.toFixed(2)}${units[idx]}`;
+      if (idx < units.length) return `${n.toFixed(2)}${units[idx]}`;
     }
     return value.toExponential(2);
   }

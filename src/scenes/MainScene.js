@@ -20,6 +20,7 @@ const DEFAULT_STATE = {
   lastCps: 0,
   lastTimestamp: 0
 };
+const AUTOSAVE_INTERVAL_MS = 10000;
 
 export class MainScene extends Phaser.Scene {
   constructor() {
@@ -49,7 +50,7 @@ export class MainScene extends Phaser.Scene {
     this.nodes = positions.map((p, i) => createGeneratorNode(this, p.x, p.y, () => this.buyGenerator(i)));
 
     this.createButtons();
-    this.time.addEvent({ delay: 10000, loop: true, callback: () => SaveSystem.save(this.state) });
+    this.time.addEvent({ delay: AUTOSAVE_INTERVAL_MS, loop: true, callback: () => SaveSystem.save(this.state) });
   }
 
   createButtons() {
